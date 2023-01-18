@@ -5,7 +5,7 @@ import os
 import flask
 import numpy as np
 import json
-import db
+import facer.db as db
 
 class Face:
     this.face_img = None
@@ -86,6 +86,7 @@ class Face:
 
 class Face_Recognizer:
     this.video_path = None
+    this.video_target_path = None
     this.new_face_list = []
     #12 frames only calculate once
     this.interval_cnt = 12
@@ -144,6 +145,7 @@ class Face_Recognizer:
             video_capture.open(this.viedo_path)
             fps = video_capture.get(cv2.CAP_PROP_FPS)
             frames = video_capture.get(cv2.CAP_PROP_FRAME_COUNT)
+            size = (int(video_capture.CAP_PROP_FRAME_WIDTH),int(video_capture.CAP_PROP_FRAME_HEIGHT))
             print(f'[DEBUG] fps={fps} frames={frames}')
             if preprocess:
                 #preprocess will analayse the video throughly to get the unknown faces 
@@ -158,6 +160,7 @@ class Face_Recognizer:
                     cnt += 1
             else:
                 print('[DEBUG] run process')
+                video_writer = cv2.VideoWriter(this.video_target_path,cv2.VideoWriter_fourcc('I','4','2','0'),fps,size)
                 frame_step = this.interval_cnt
                 cnt = 0
                 faces_list = []
@@ -168,14 +171,12 @@ class Face_Recognizer:
                     for face in faces_list:
                         if face.is_face:
                             #print on the frame
-
-
+                            text_x = x
+                            text_y = y - h
+                            if test_y < 0 :
+                                test_y = 0
+                            cv2.putText(frame,face.face_name,(text_x,text_y),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
+                            cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+                    video_writer.write(frame)
                     cnt += 1
-
-                    
-
-                                    
-
-
-
    

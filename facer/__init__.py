@@ -15,7 +15,7 @@ def create_app():
     def hello():
         return '<p>hello world</p>'
 
-    from . import db
+    from facer import db
     db.init_app(app)
 
     app.add_url_rule('/',endpoint='index') 
