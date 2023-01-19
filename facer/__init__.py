@@ -18,5 +18,8 @@ def create_app():
     from facer import db
     db.init_app(app)
 
+    from facer import main
+    app.register_blueprint(main.bp)
+
     app.add_url_rule('/',endpoint='index') 
     return app

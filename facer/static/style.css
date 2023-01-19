@@ -1,0 +1,46 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.video_blocks{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.process_btn{
+    display:flex;
+    justify-content:center;
+}
+
+.process_btn form input{
+    padding:10px 15px 10px 15px;
+    margin:10px;
+}
+
+.new_face_block{
+    display:flex;
+    align-items:flex-end;
+    margin:10px;
+    
+}
+
+.avater img{
+    width:100px;
+    height:100px;
+}
+
+.new_face_form{
+    margin:10px;
+}
+
+
